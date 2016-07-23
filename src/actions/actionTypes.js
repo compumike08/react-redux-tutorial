@@ -1,3 +1,6 @@
+// Ajax actions
+export const BEGIN_AJAX_CALL = 'BEGIN_AJAX_CALL';
+
 // Courses actions
 export const LOAD_COURSES_SUCCESS = 'LOAD_COURSES_SUCCESS';
 export const CREATE_COURSE_SUCCESS = 'CREATE_COURSE_SUCCESS';
