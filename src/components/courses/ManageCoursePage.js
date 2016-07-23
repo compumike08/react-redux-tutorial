@@ -9,7 +9,7 @@ class ManageCoursePage extends React.Component {
     super(props, context);
 
     this.state = {
-      course: Object.assign({}, props.initialCourse),
+      course: Object.assign({}, props.course),
       errors: {}
     };
 
@@ -44,7 +44,7 @@ class ManageCoursePage extends React.Component {
 }
 
 ManageCoursePage.propTypes = {
-  initialCourse: PropTypes.object.isRequired,
+  course: PropTypes.object.isRequired,
   authors: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 };
@@ -66,10 +66,10 @@ function getCourseById(courses, id) {
 function mapStateToProps(state, ownProps) {
   const courseId = ownProps.params.id;   // from the path '/course/:id'
 
-  let initialCourse = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
+  let course = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
 
   if (courseId && state.courses.length > 0) {
-    initialCourse = getCourseById(state.courses, courseId);
+    course = getCourseById(state.courses, courseId);
   }
 
   const authorsFormattedForDropdown = state.authors.map(author => {
@@ -80,7 +80,7 @@ function mapStateToProps(state, ownProps) {
   });
 
   return {
-    initialCourse: initialCourse,
+    course: course,
     authors: authorsFormattedForDropdown
   };
 }
