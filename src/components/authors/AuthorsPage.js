@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import AuthorsList from './AuthorsList';
 
 class AuthorsPage extends React.Component {
   constructor(props, context) {
@@ -8,21 +9,24 @@ class AuthorsPage extends React.Component {
   }
 
   render() {
+    const {authors} = this.props;
+
     return (
       <div>
         <h1>Authors</h1>
+        <AuthorsList authors={authors} />
       </div>
     );
   }
 }
 
 AuthorsPage.propTypes = {
-  //myProp: PropTypes.string.isRequired
+  authors: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    state: state
+    authors: state.authors
   };
 }
 
