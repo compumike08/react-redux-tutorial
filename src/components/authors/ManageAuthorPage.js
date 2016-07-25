@@ -10,12 +10,29 @@ class ManageAuthorPage extends React.Component {
     this.state = {
       author: Object.assign({}, props.author)
     };
+
+    this.updateAuthorState = this.updateAuthorState.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.author.id != nextProps.author.id) {
+      // Necessary to populate form when existing author is loaded directly.
+      this.setState({author: Object.assign({}, nextProps.author)});
+    }
+  }
+
+  updateAuthorState(event) {
+    const field = event.target.name;
+    let author = this.state.author;
+    author[field] = event.target.value;
+    return this.setState({author: author});
   }
 
   render() {
     return (
       <AuthorForm
         author={this.state.author}
+        onChange={this.updateAuthorState}
       />
     );
   }

@@ -28,7 +28,7 @@ const AuthorForm = ({author, onChange, errors}) => {
 
 AuthorForm.propTypes = {
   author: React.PropTypes.object.isRequired,
-  onChange: React.PropTypes.func,
+  onChange: React.PropTypes.func.isRequired,
   errors: React.PropTypes.object
 };
 
