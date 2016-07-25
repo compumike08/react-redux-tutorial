@@ -5,9 +5,11 @@ const AuthorsList = ({authors}) => {
   return (
     <table className="table">
       <thead>
-      <th>&nbsp;</th>
-      <th>First Name</th>
-      <th>Last Name</th>
+        <tr>
+          <th>&nbsp;</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+        </tr>
       </thead>
       <tbody>
       {authors.map(author =>
