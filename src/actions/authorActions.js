@@ -24,12 +24,14 @@ export function loadAuthors() {
 export function saveAuthor(author) {
   return function (dispatch, getState) {
     dispatch(beginAjaxCall());
-    return AuthorApi.saveAuthor(author).then(() => {
+    return AuthorApi.saveAuthor(author).then(savedAuthor => {
       if (author.id) {
-        //handle dispatching UPDATE_AUTHOR_SUCCESS
+        console.log(author);
+        console.log(savedAuthor);
       } else {
-        dispatch(createAuthorSuccess(author));
+        dispatch(createAuthorSuccess(savedAuthor));
       }
+
     }).catch(error => {
       dispatch(ajaxCallError(error));
       throw(error);

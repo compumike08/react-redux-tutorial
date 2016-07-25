@@ -2,6 +2,8 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import AuthorForm from './AuthorForm';
+import * as authorActions from '../../actions/authorActions';
+import toastr from 'toastr';
 
 class ManageAuthorPage extends React.Component {
   constructor(props, context) {
@@ -31,6 +33,18 @@ class ManageAuthorPage extends React.Component {
 
   saveAuthor(event) {
     event.preventDefault();
+    this.props.actions.saveAuthor(this.state.author)
+      .then(() => {
+        this.redirect();
+      })
+      .catch(error => {
+        toastr.error(error);
+      });
+  }
+
+  redirect() {
+    toastr.success("Author saved");
+    this.context.router.push('/authors');
   }
 
   render() {
@@ -45,7 +59,12 @@ class ManageAuthorPage extends React.Component {
 }
 
 ManageAuthorPage.propTypes = {
-  author: PropTypes.object.isRequired
+  author: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired
+};
+
+ManageAuthorPage.contextTypes = {
+  router: PropTypes.object
 };
 
 function getAuthorById(authors, id) {
@@ -74,7 +93,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    //actions: bindActionCreators(actions, dispatch)
+    actions: bindActionCreators(authorActions, dispatch)
   };
 }
 
