@@ -1,11 +1,16 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import {browserHistory} from 'react-router';
 import AuthorsList from './AuthorsList';
 
 class AuthorsPage extends React.Component {
   constructor(props, context) {
     super(props, context);
+  }
+
+  redirectToAddAuthorPage(){
+    browserHistory.push("/author");
   }
 
   render() {
@@ -14,7 +19,11 @@ class AuthorsPage extends React.Component {
     return (
       <div>
         <h1>Authors</h1>
-        <AuthorsList authors={authors} />
+        <input type="submit"
+               value="Add Author"
+               className="btn btn-primary"
+               onClick={this.redirectToAddAuthorPage}/>
+        <AuthorsList authors={authors}/>
       </div>
     );
   }
