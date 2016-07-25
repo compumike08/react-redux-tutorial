@@ -12,6 +12,7 @@ class ManageAuthorPage extends React.Component {
     };
 
     this.updateAuthorState = this.updateAuthorState.bind(this);
+    this.saveAuthor = this.saveAuthor.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -28,11 +29,16 @@ class ManageAuthorPage extends React.Component {
     return this.setState({author: author});
   }
 
+  saveAuthor(event) {
+    event.preventDefault();
+  }
+
   render() {
     return (
       <AuthorForm
         author={this.state.author}
         onChange={this.updateAuthorState}
+        onSave={this.saveAuthor}
       />
     );
   }
