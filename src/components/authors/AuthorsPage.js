@@ -7,10 +7,19 @@ import AuthorsList from './AuthorsList';
 class AuthorsPage extends React.Component {
   constructor(props, context) {
     super(props, context);
+
+    this.redirectToAddAuthorPage = this.redirectToAddAuthorPage.bind(this);
+    this.editAuthor = this.editAuthor.bind(this);
   }
 
   redirectToAddAuthorPage(){
     browserHistory.push("/author");
+  }
+
+  editAuthor(event){
+    event.preventDefault();
+    const editAuthorId = event.currentTarget.value;
+    browserHistory.push("/author/" + editAuthorId);
   }
 
   render() {
@@ -23,7 +32,7 @@ class AuthorsPage extends React.Component {
                value="Add Author"
                className="btn btn-primary"
                onClick={this.redirectToAddAuthorPage}/>
-        <AuthorsList authors={authors}/>
+        <AuthorsList authors={authors} onEdit={this.editAuthor}/>
       </div>
     );
   }

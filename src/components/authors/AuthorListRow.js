@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import FontAwesome from 'react-fontawesome';
 
-const AuthorListRow = ({author}) => {
+const AuthorListRow = ({author, onEdit}) => {
   return (
     <tr>
       <td>
@@ -11,7 +11,7 @@ const AuthorListRow = ({author}) => {
           </button>
         </span>
         <span>
-          <button className="myapp-button-controls btn btn-success btn-sm" value={author.id}>
+          <button className="myapp-button-controls btn btn-success btn-sm" value={author.id} onClick={onEdit}>
             <FontAwesome name="edit"/>
           </button>
         </span>
@@ -23,7 +23,8 @@ const AuthorListRow = ({author}) => {
 };
 
 AuthorListRow.propTypes = {
-  author: PropTypes.object.isRequired
+  author: PropTypes.object.isRequired,
+  onEdit: PropTypes.func.isRequired
 };
 
 export default AuthorListRow;
