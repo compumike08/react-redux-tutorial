@@ -24,7 +24,7 @@ class CoursesPage extends React.Component {
         toastr.success('Course deleted');
       })
       .catch(error => {
-        toastr.error();
+        toastr.error(error);
       });
   }
 
