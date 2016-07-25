@@ -1,3 +1,12 @@
+/* The code in this file is based on code written by Cory House and posted on his
+ GitHub page here: https://github.com/coryhouse/pluralsight-redux-starter/blob/master/src/api/mockAuthorApi.js
+
+ I have refactored this code to behave a little bit more like a real server.
+ I refactored this code very quickly, and did not concern myself with best
+ practices or performance. If you wish to use my refactored code yourself
+ you are welcome to do so, however you do so at your own risk.
+ */
+
 import delay from './delay';
 
 // This file mocks a web API by working with the hard-coded data below.
