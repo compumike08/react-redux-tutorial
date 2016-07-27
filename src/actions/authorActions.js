@@ -61,7 +61,9 @@ export function deleteAuthor(authorId) {
       });
     } else {
       const errMessage = "Cannot delete author who is attached to one or more courses";
-      throw(errMessage);
+      return new Promise((resolve, reject) => {
+        reject(errMessage);
+      });
     }
   };
 }
