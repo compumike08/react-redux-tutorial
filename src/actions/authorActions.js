@@ -10,6 +10,10 @@ export function createAuthorSuccess(author) {
   return {type: types.CREATE_AUTHOR_SUCCESS, author};
 }
 
+export function updateAuthorSuccess(author) {
+  return {type: types.UPDATE_AUTHOR_SUCCESS, author};
+}
+
 export function loadAuthors() {
   return dispatch => {
     dispatch(beginAjaxCall());
@@ -26,12 +30,10 @@ export function saveAuthor(author) {
     dispatch(beginAjaxCall());
     return AuthorApi.saveAuthor(author).then(savedAuthor => {
       if (author.id) {
-        console.log(author);
-        console.log(savedAuthor);
+        dispatch(updateAuthorSuccess(savedAuthor));
       } else {
         dispatch(createAuthorSuccess(savedAuthor));
       }
-
     }).catch(error => {
       dispatch(ajaxCallError(error));
       throw(error);
