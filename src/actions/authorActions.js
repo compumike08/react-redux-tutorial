@@ -1,7 +1,6 @@
 import * as types from './actionTypes';
 import AuthorApi from '../api/mockAuthorApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
-import {beginDeleteAuthor, completeDeleteAuthor, abortDeleteAuthor} from './deleteProgressActions';
 
 export function loadAuthorsSuccess(authors) {
   return {type: types.LOAD_AUTHORS_SUCCESS, authors};
@@ -48,7 +47,6 @@ export function saveAuthor(author) {
 
 export function deleteAuthor(authorId) {
   return function (dispatch, getState) {
-    dispatch(beginDeleteAuthor(authorId));
     const currentState = getState();
 
     let coursesWithAuthor = currentState.courses.filter(course => course.authorId === authorId);
@@ -57,16 +55,13 @@ export function deleteAuthor(authorId) {
       dispatch(beginAjaxCall());
       return AuthorApi.deleteAuthor(authorId).then(() => {
         dispatch(deleteAuthorSuccess(authorId));
-        dispatch(completeDeleteAuthor(authorId));
       }).catch(error => {
         dispatch(ajaxCallError(error));
-        dispatch(abortDeleteAuthor(authorId));
         throw(error);
       });
     } else {
       const errMessage = "Cannot delete author who is attached to one or more courses";
       return new Promise((resolve, reject) => {
-        dispatch(abortDeleteAuthor(authorId));
         reject(errMessage);
       });
     }
