@@ -47,12 +47,21 @@ export function saveAuthor(author) {
 
 export function deleteAuthor(authorId) {
   return function (dispatch, getState) {
-    dispatch(beginAjaxCall());
-    return AuthorApi.deleteAuthor(authorId).then(() => {
-      dispatch(deleteAuthorSuccess(authorId));
-    }).catch(error => {
-      dispatch(ajaxCallError(error));
-      throw(error);
-    });
+    const currentState = getState();
+
+    let coursesWithAuthor = currentState.courses.filter(course => course.authorId === authorId);
+
+    if (coursesWithAuthor.length <= 0) {
+      dispatch(beginAjaxCall());
+      return AuthorApi.deleteAuthor(authorId).then(() => {
+        dispatch(deleteAuthorSuccess(authorId));
+      }).catch(error => {
+        dispatch(ajaxCallError(error));
+        throw(error);
+      });
+    } else {
+      const errMessage = "Cannot delete author who is attached to one or more courses";
+      throw(errMessage);
+    }
   };
 }
