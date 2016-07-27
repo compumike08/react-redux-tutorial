@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import AuthorListRow from './AuthorListRow';
 
-const AuthorsList = ({authors, onEdit}) => {
+const AuthorsList = ({authors, onEdit, onDelete}) => {
   return (
     <table className="table">
       <thead>
@@ -13,7 +13,7 @@ const AuthorsList = ({authors, onEdit}) => {
       </thead>
       <tbody>
       {authors.map(author =>
-        <AuthorListRow key={author.id} author={author} onEdit={onEdit}/>
+        <AuthorListRow key={author.id} author={author} onEdit={onEdit} onDelete={onDelete}/>
       )}
       </tbody>
     </table>
@@ -22,7 +22,8 @@ const AuthorsList = ({authors, onEdit}) => {
 
 AuthorsList.propTypes = {
   authors: PropTypes.array.isRequired,
-  onEdit: PropTypes.func.isRequired
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired
 };
 
 export default AuthorsList;

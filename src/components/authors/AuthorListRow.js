@@ -1,12 +1,12 @@
 import React, {PropTypes} from 'react';
 import FontAwesome from 'react-fontawesome';
 
-const AuthorListRow = ({author, onEdit}) => {
+const AuthorListRow = ({author, onEdit, onDelete}) => {
   return (
     <tr>
       <td>
         <span>
-          <button className="myapp-button-controls btn btn-danger btn-sm" value={author.id}>
+          <button className="myapp-button-controls btn btn-danger btn-sm" value={author.id} onClick={onDelete}>
             <FontAwesome name="close"/>
           </button>
         </span>
@@ -24,7 +24,8 @@ const AuthorListRow = ({author, onEdit}) => {
 
 AuthorListRow.propTypes = {
   author: PropTypes.object.isRequired,
-  onEdit: PropTypes.func.isRequired
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired
 };
 
 export default AuthorListRow;
