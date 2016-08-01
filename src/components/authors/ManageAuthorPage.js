@@ -11,7 +11,8 @@ class ManageAuthorPage extends React.Component {
 
     this.state = {
       author: Object.assign({}, props.author),
-      errors: {}
+      errors: {},
+      saving: false
     };
 
     this.updateAuthorState = this.updateAuthorState.bind(this);
@@ -34,11 +35,14 @@ class ManageAuthorPage extends React.Component {
 
   saveAuthor(event) {
     event.preventDefault();
+    this.setState({saving: true});
     this.props.actions.saveAuthor(this.state.author)
       .then(() => {
+        this.setState({saving: false});
         this.redirect();
       })
       .catch(error => {
+        this.setState({saving: false});
         toastr.error(error);
       });
   }
@@ -54,6 +58,7 @@ class ManageAuthorPage extends React.Component {
         author={this.state.author}
         onChange={this.updateAuthorState}
         onSave={this.saveAuthor}
+        saving={this.state.saving}
         errors={this.state.errors}
       />
     );
