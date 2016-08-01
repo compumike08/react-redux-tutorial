@@ -6,7 +6,7 @@ const AuthorListRow = ({author, onEdit, onDelete}) => {
     <tr>
       <td>
         <span>
-          <button className="myapp-button-controls btn btn-danger btn-sm" value={author.id} onClick={onDelete}>
+          <button className="myapp-button-controls btn btn-danger btn-sm" disabled={author.deleting} value={author.id} onClick={onDelete}>
             <FontAwesome name="close"/>
           </button>
         </span>

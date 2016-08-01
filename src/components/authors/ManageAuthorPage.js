@@ -80,7 +80,7 @@ function getAuthorById(authors, id) {
 function mapStateToProps(state, ownProps) {
   const authorId = ownProps.params.id;  //from the path '/author/:id'
 
-  let author = {id: '', firstName: '', lastName: ''};
+  let author = {id: '', firstName: '', lastName: '', deleting: false};
 
   if (authorId && state.authors.length > 0) {
     author = getAuthorById(state.authors, authorId);
