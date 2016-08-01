@@ -10,7 +10,8 @@ class ManageAuthorPage extends React.Component {
     super(props, context);
 
     this.state = {
-      author: Object.assign({}, props.author)
+      author: Object.assign({}, props.author),
+      errors: {}
     };
 
     this.updateAuthorState = this.updateAuthorState.bind(this);
@@ -53,6 +54,7 @@ class ManageAuthorPage extends React.Component {
         author={this.state.author}
         onChange={this.updateAuthorState}
         onSave={this.saveAuthor}
+        errors={this.state.errors}
       />
     );
   }
