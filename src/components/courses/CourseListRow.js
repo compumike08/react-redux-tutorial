@@ -7,8 +7,9 @@ const CourseListRow = ({course, onDelete}) => {
     <tr>
       <td><a href={course.watchHref} target="_blank">Watch</a></td>
       <td>
-        <button className="myapp-button-controls btn btn-danger btn-sm" onClick={onDelete} value={course.id}>
-          <FontAwesome name="close"/>
+        <button className="myapp-button-controls btn btn-danger btn-sm" disabled={course.deleting} onClick={onDelete}
+                value={course.id}>
+          <FontAwesome name={course.deleting ? "refresh" : "close"} spin={course.deleting ? true : false}/>
         </button>
       </td>
       <td><Link to={'/course/' + course.id}>{course.title}</Link></td>
